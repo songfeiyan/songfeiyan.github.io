@@ -1,0 +1,588 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>songfeiyan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="宋飞燕">
+    
+
+    
+    <meta property="og:type" content="website">
+<meta property="og:title" content="songfeiyan">
+<meta property="og:url" content="https://songfeiyan.github.io/index.html">
+<meta property="og:site_name" content="songfeiyan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="songfeiyan">
+
+    
+    <link rel="alternative" href="/atom.xml" title="songfeiyan" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="songfeiyan" title="songfeiyan"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="songfeiyan">songfeiyan</a></h1>
+				<h2 class="blog-motto">宋飞燕的博客</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:songfeiyan.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/24/page6/" title="swiper和echarts结合" itemprop="url">swiper和echarts结合</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="宋飞燕" target="_blank" itemprop="author">宋飞燕</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-24T02:56:20.405Z" itemprop="datePublished"> Published 2018-01-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>工作需要，要实现一个整屏滚动的效果，所以想用swiper。页面中嵌杂着图表，用的是echarts。要实现那种每次切换之后重新加载。但是怎么解决echarts每次切换的重新加载呢。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>每次切换之后将（利用swiper的onTransitionStart和onTransitionEnd）页面中echarts清空，通过js动态添加</p>
+<h2 id="HTML代码"><a href="#HTML代码" class="headerlink" title="HTML代码"></a>HTML代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"swiper-container"</span>&gt;</span><br><span class="line">  &lt;div class=<span class="string">"swiper-wrapper"</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">"swiper-slide"</span>&gt;slide1&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">"swiper-slide"</span>&gt;slide2&lt;/div&gt;  </span><br><span class="line">    &lt;div class=<span class="string">"swiper-slide"</span>&gt;</span><br><span class="line">      &lt;div class=<span class="string">"eachrt-box"</span>&gt;</span><br><span class="line">        &lt;div id=<span class="string">"echart-wrap"</span>&gt;</span><br><span class="line">          &lt;div id=<span class="string">"echart-wrap"</span>&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line">var myChart = echarts.init(document.getElementById(<span class="string">'echart-wrap'</span>));</span><br><span class="line">window.onload = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  $(<span class="string">'.loading'</span>).hide();</span><br><span class="line">  $(<span class="string">'.swiper-slide'</span>).eq(0).find(<span class="string">'.hideLeft'</span>).show().addClass(<span class="string">'fadeInLeft'</span>);</span><br><span class="line">  // swiper实例</span><br><span class="line">  var swiper = new Swiper(<span class="string">'.swiper-container'</span>, &#123;</span><br><span class="line">    pagination: <span class="string">'.swiper-pagination'</span>,</span><br><span class="line">    direction: <span class="string">'vertical'</span>,</span><br><span class="line">    onTransitionStart: <span class="keyword">function</span>(swiper)&#123;</span><br><span class="line">      var index = swiper.activeIndex;</span><br><span class="line">      <span class="keyword">if</span>(index &lt; 2) &#123;</span><br><span class="line">        $(<span class="string">'.swiper-slide'</span>).eq(index).find(<span class="string">'.hideLeft'</span>).hide().removeClass(<span class="string">'fadeInLeft'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>( index &gt;= 2 ) &#123;</span><br><span class="line">        $(<span class="string">'.swiper-slide'</span>).eq(index).find(<span class="string">'.eachrt-box'</span>).empty();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onTransitionEnd: <span class="keyword">function</span>(swiper)&#123;</span><br><span class="line">      var index = swiper.activeIndex;</span><br><span class="line">      <span class="keyword">if</span>(index &lt; 2) &#123;</span><br><span class="line">        $(<span class="string">'.swiper-slide'</span>).eq(index).find(<span class="string">'.hideLeft'</span>).show().addClass(<span class="string">'fadeInLeft'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(index == 2)&#123;</span><br><span class="line">        $(<span class="string">'.swiper-slide'</span>).eq(index).find(<span class="string">'.eachrt-box'</span>).append(<span class="string">'&lt;div id="echart-wrap"&gt;&lt;/div&gt;'</span>);</span><br><span class="line">        var myChart = echarts.init(document.getElementById(<span class="string">'echart-wrap'</span>));</span><br><span class="line">        echartAnimate(myChart);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">// 第三屏echart</span><br><span class="line"><span class="keyword">function</span> echartAnimate(myChart) &#123;</span><br><span class="line">  var datas = [20, 40, 300, 25, 20];</span><br><span class="line">  var data = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; datas.length; i++)&#123;</span><br><span class="line">    data[i] = [0, datas[i]];</span><br><span class="line">  &#125;</span><br><span class="line">  var cities = [<span class="string">'北京'</span>, <span class="string">'上海'</span>, <span class="string">'深圳'</span>, <span class="string">'广州'</span>, <span class="string">'苏州'</span>];</span><br><span class="line">  var barHeight = 50;</span><br><span class="line"></span><br><span class="line">  var option = &#123;</span><br><span class="line">    grid: &#123;</span><br><span class="line">      top: 100</span><br><span class="line">    &#125;,</span><br><span class="line">    angleAxis: &#123;</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">'category'</span>,</span><br><span class="line">      data: cities,</span><br><span class="line">      axisLine: &#123;</span><br><span class="line">        lineStyle: &#123;</span><br><span class="line">          color: <span class="string">'#666'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">      show: <span class="literal">true</span>,</span><br><span class="line">      formatter: <span class="keyword">function</span> (params) &#123;</span><br><span class="line">        var id = params.dataIndex;</span><br><span class="line">        <span class="built_in">return</span> cities[id] + <span class="string">'：'</span> +  data[id][1] + <span class="string">'人'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    radiusAxis: &#123;</span><br><span class="line">      show: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    polar: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    series: [&#123;</span><br><span class="line">      <span class="built_in">type</span>: <span class="string">'bar'</span>,</span><br><span class="line">      itemStyle: &#123;</span><br><span class="line">        normal: &#123;</span><br><span class="line">          color: <span class="string">'lightBlue'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      data: data.map(<span class="keyword">function</span> (d) &#123;</span><br><span class="line">        <span class="built_in">return</span> d[0];</span><br><span class="line">      &#125;),</span><br><span class="line">      coordinateSystem: <span class="string">'polar'</span>,</span><br><span class="line">      stack: <span class="string">'最大最小值'</span>,</span><br><span class="line">      silent: <span class="literal">true</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">'bar'</span>,</span><br><span class="line">        data: data.map(<span class="keyword">function</span> (d) &#123;</span><br><span class="line">          <span class="built_in">return</span> d[1] - d[0];</span><br><span class="line">        &#125;),</span><br><span class="line">        itemStyle: &#123;</span><br><span class="line">          normal: &#123;</span><br><span class="line">            color: <span class="string">'lightBlue'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        coordinateSystem: <span class="string">'polar'</span>,</span><br><span class="line">        name: <span class="string">'价格范围'</span>,</span><br><span class="line">        stack: <span class="string">'最大最小值'</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">'bar'</span>,</span><br><span class="line">        itemStyle: &#123;</span><br><span class="line">          normal: &#123;</span><br><span class="line">            color: <span class="string">'lightBlue'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        data: data.map(<span class="keyword">function</span> (d) &#123;</span><br><span class="line">          <span class="built_in">return</span> d[2] - barHeight;</span><br><span class="line">        &#125;),</span><br><span class="line">        coordinateSystem: <span class="string">'polar'</span>,</span><br><span class="line">        stack: <span class="string">'均值'</span>,</span><br><span class="line">        silent: <span class="literal">true</span>,</span><br><span class="line">        z: 10</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">'bar'</span>,</span><br><span class="line">        data: data.map(<span class="keyword">function</span> (d) &#123;</span><br><span class="line">          <span class="built_in">return</span> barHeight * 2</span><br><span class="line">        &#125;),</span><br><span class="line">        itemStyle: &#123;</span><br><span class="line">          normal: &#123;</span><br><span class="line">            color: <span class="string">'lightBlue'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        coordinateSystem: <span class="string">'polar'</span>,</span><br><span class="line">        name: <span class="string">'均值'</span>,</span><br><span class="line">        stack: <span class="string">'均值'</span>,</span><br><span class="line">        barGap: <span class="string">'-100%'</span>,</span><br><span class="line">        z: 10</span><br><span class="line">    &#125;],</span><br><span class="line">    legend: &#123;</span><br><span class="line">        show: <span class="literal">true</span>,</span><br><span class="line">        data: [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  myChart.setOption(option);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <!-- <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer> -->
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/22/page5/" title="一些零散的知识点" itemprop="url">一些零散的知识点</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="宋飞燕" target="_blank" itemprop="author">宋飞燕</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-22T09:42:23.735Z" itemprop="datePublished"> Published 2018-01-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="谷歌的手机模式，点击有蓝色底色"><a href="#谷歌的手机模式，点击有蓝色底色" class="headerlink" title="谷歌的手机模式，点击有蓝色底色"></a>谷歌的手机模式，点击有蓝色底色</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-webkit-tap-highlight-color:transparent</span><br></pre></td></tr></table></figure>
+<h2 id="hexo搭建部署博客三步走"><a href="#hexo搭建部署博客三步走" class="headerlink" title="hexo搭建部署博客三步走"></a>hexo搭建部署博客三步走</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">cnpm install --save hexo-deployer-git</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: 通常情况下是两步走，第一步和第三步，在这里记录一下第三步不成功的情况下需要执行一下第二部</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <!-- <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer> -->
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/22/page4/" title="移动端无缝滚动" itemprop="url">移动端无缝滚动</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="宋飞燕" target="_blank" itemprop="author">宋飞燕</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-22T03:58:44.815Z" itemprop="datePublished"> Published 2018-01-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>前一段时间项目里需要写移动端的无缝滚动，在这里保存下~</p>
+<h2 id="HTML代码"><a href="#HTML代码" class="headerlink" title="HTML代码"></a>HTML代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"scroll-txt"</span>&gt;</span><br><span class="line">  &lt;ul class=<span class="string">"font-inner"</span>&gt;</span><br><span class="line">    &lt;li&gt;滚动内容滚动内容&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;滚动内容滚动内容&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;滚动内容滚动内容&lt;/li&gt;</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="css代码"><a href="#css代码" class="headerlink" title="css代码"></a>css代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">   *&#123; padding: 0;margin: 0;&#125;</span><br><span class="line">    a&#123;text-decoration:none; color:inherit;&#125;</span><br><span class="line">    ul&#123;margin:0; padding:0;&#125;</span><br><span class="line">    ul li&#123;list-style:none;&#125;</span><br><span class="line">    .scroll-txt&#123;width:350px; height:60px; border:1px solid <span class="comment">#ccc; color:#484848; position:relative;  overflow:hidden; box-sizing: border-box;&#125;</span></span><br><span class="line">    .scroll-txt .font-inner&#123;position:absolute; left:8px; top:0;&#125;</span><br><span class="line">    .scroll-txt .font-inner li&#123;height:30px; line-height:30px;&#125;</span><br><span class="line">    .scroll-txt a:hover&#123;color:<span class="comment">#0C6796;&#125;</span></span><br><span class="line">  &lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">      var index = 0;</span><br><span class="line"></span><br><span class="line">      var oInner = $(<span class="string">".font-inner"</span>);</span><br><span class="line">      var oLi = $(<span class="string">".font-inner li"</span>);</span><br><span class="line"></span><br><span class="line">      //克隆前两个放到最后（实现无缝）</span><br><span class="line">      oLi.eq(0).<span class="built_in">clone</span>(<span class="literal">true</span>).appendTo(oInner);</span><br><span class="line">      oLi.eq(1).<span class="built_in">clone</span>(<span class="literal">true</span>).appendTo(oInner);</span><br><span class="line"></span><br><span class="line">      var liHeight = $(<span class="string">".scroll-txt"</span>).height();//获取视口的高度</span><br><span class="line">      var totalHeight = (oLi.length * oLi.eq(0).height());//获取li的总高度</span><br><span class="line"></span><br><span class="line">      //给ul赋值高度</span><br><span class="line">      oInner.height(totalHeight);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">function</span> <span class="function"><span class="title">tab</span></span>()&#123;</span><br><span class="line">        oInner.animate(&#123;</span><br><span class="line">          top: -index * oLi.eq(0).height()</span><br><span class="line">        &#125;,400,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">          <span class="keyword">if</span>(index == oLi.length) &#123;</span><br><span class="line">            oInner.css(&#123;top: 0&#125;);</span><br><span class="line">            index = 0;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">function</span> <span class="function"><span class="title">next</span></span>() &#123;</span><br><span class="line">        index++;</span><br><span class="line">        <span class="keyword">if</span>(index &gt; oLi.length) &#123;</span><br><span class="line">          index = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        tab();</span><br><span class="line">      &#125;</span><br><span class="line">      //自动轮播</span><br><span class="line">      var autoTimer = setInterval(next,2000);</span><br><span class="line">    &#125;);</span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>More info: 该方法适用于jquery和zepto，如果遇到不兼容zepto，在zepto下面追加fx.js的代码即可</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <!-- <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer> -->
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/22/page3/" title="js倒计时代码" itemprop="url">js倒计时代码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="宋飞燕" target="_blank" itemprop="author">宋飞燕</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-22T03:53:31.956Z" itemprop="datePublished"> Published 2018-01-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>前一段时间项目里需要写倒计时代码，在这里保存下~</p>
+<h2 id="HTML代码"><a href="#HTML代码" class="headerlink" title="HTML代码"></a>HTML代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;span class=<span class="string">"tt"</span>&gt;00&lt;/span&gt;天</span><br><span class="line">  &lt;span class=<span class="string">"tt"</span>&gt;00&lt;/span&gt;时</span><br><span class="line">  &lt;span class=<span class="string">"tt"</span>&gt;00&lt;/span&gt;分</span><br><span class="line">  &lt;span class=<span class="string">"tt"</span>&gt;00&lt;/span&gt;秒</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var deadline = <span class="string">"2018-01-15 15:00"</span>;</span><br><span class="line">    var <span class="built_in">times</span> = &#123;</span><br><span class="line">        deadline: deadline,</span><br><span class="line">        timeDiff:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            var star = new Date();</span><br><span class="line">            var end  = new Date(this.deadline);</span><br><span class="line">            var timediff = end.getTime()-star.getTime();</span><br><span class="line">            timediff = parseInt(timediff/1000);</span><br><span class="line">            <span class="built_in">return</span> timediff;</span><br><span class="line">        &#125;,</span><br><span class="line">        countdown:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            var intDiff = this.timeDiff();</span><br><span class="line">            setInterval(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">              var day=0, hour=0, minute=0, second=0;</span><br><span class="line">              var dayStr, hourStr, minuteStr, secondStr;</span><br><span class="line">              <span class="keyword">if</span>(intDiff &gt; 0)&#123;</span><br><span class="line">                  day = Math.floor(intDiff / (60 * 60 * 24));</span><br><span class="line">                  hour = Math.floor(intDiff / (60 * 60)) - (day * 24);</span><br><span class="line">                  minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);</span><br><span class="line">                  second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);</span><br><span class="line">              &#125;</span><br><span class="line">              // <span class="keyword">if</span> (day &lt;= 9) day = <span class="string">'0'</span> + day;</span><br><span class="line">              // <span class="keyword">if</span> (hour &lt;= 9) hour = <span class="string">'0'</span> + hour;</span><br><span class="line">              // <span class="keyword">if</span> (minute &lt;= 9) minute = <span class="string">'0'</span> + minute;</span><br><span class="line">              // <span class="keyword">if</span> (second &lt;= 9) second = <span class="string">'0'</span> + second;</span><br><span class="line">              <span class="keyword">if</span> (day &lt; 10) &#123;</span><br><span class="line">                dayStr = <span class="string">'&lt;span&gt;0&lt;/span&gt;&lt;span&gt;'</span>+ day +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                dayStr = <span class="string">'&lt;span&gt;'</span>+ day +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (hour &lt; 10) &#123;</span><br><span class="line">                hourStr = <span class="string">'&lt;span&gt;0&lt;/span&gt;&lt;span&gt;'</span>+ hour +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                hourStr = <span class="string">'&lt;span&gt;'</span>+ hour +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (minute &lt; 10) &#123;</span><br><span class="line">                minuteStr = <span class="string">'&lt;span&gt;0&lt;/span&gt;&lt;span&gt;'</span>+ minute +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                minuteStr = <span class="string">'&lt;span&gt;'</span>+ minute +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (second &lt; 10) &#123;</span><br><span class="line">                secondStr = <span class="string">'&lt;span&gt;0&lt;/span&gt;&lt;span&gt;'</span>+ second +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                secondStr = <span class="string">'&lt;span&gt;'</span>+ second +<span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              $(<span class="string">'.tt'</span>).eq(0).html(dayStr);</span><br><span class="line">              $(<span class="string">'.tt'</span>).eq(1).html(hourStr);</span><br><span class="line">              $(<span class="string">'.tt'</span>).eq(2).html(minuteStr);</span><br><span class="line">              $(<span class="string">'.tt'</span>).eq(3).html(secondStr);</span><br><span class="line">              intDiff--;</span><br><span class="line">            &#125;, 1000);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    times.countdown();</span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <!-- <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer> -->
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/09/page2/" title="单个gitHub账号添加多个gitHub pages" itemprop="url">单个gitHub账号添加多个gitHub pages</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="宋飞燕" target="_blank" itemprop="author">宋飞燕</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-09T08:13:20.384Z" itemprop="datePublished"> Published 2018-01-09</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>之前自己写了一个vue项目放在gitHub.io项目下，所以可以通过目录链接访问自己的项目。但是最近基于hexo搭建了自己的博客，也是需要放到gitHub.io项目中的。但是每次通过hexo部署到gitHub之后，都会覆盖整个项目文件的。所以造成了原来项目丢失，不能访问的问题。 </p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>gitHub虽然不支持创建多个个人主页，但是支持多个项目主页<br>个人主页：必须要和用户的gitHub账号同名，所以每个用户有且只能有一个项目主页<a>（userName.gitHub.io）</a><br>项目主页：命名没有限制<a>（userName.gitHub.io/projectName）</a></p>
+<h2 id="配置项目主页"><a href="#配置项目主页" class="headerlink" title="配置项目主页"></a>配置项目主页</h2><p>（1）新建一个项目，项目名称随意<br>（2）进入项目，选择settings项，往下拉找到GitHub Pages选择master branch(use the master branch for GitHub pages)<br><img src="/images/page2.png" alt=""></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>博客链接： <a href="https://songfeiyan.gitHub.io">https://songfeiyan.gitHub.io</a><br>项目链接： <a href="https://songfeiyan.gitHub.io/vuepro/sfy/dist/index.html">https://songfeiyan.gitHub.io/vuepro/sfy/dist/index.html</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <!-- <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer> -->
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/08/page1/" title="iframe不能初始化高度" itemprop="url">iframe不能初始化高度</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="宋飞燕" target="_blank" itemprop="author">宋飞燕</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-08T11:09:27.068Z" itemprop="datePublished"> Published 2018-01-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>管理系统通过左边导航栏点击，然后在右边的iframe标签下打开新的页面。但是iframe不能自动伸缩高度，如果给iframe设置默认高度，当iframe内容过高，则iframe会出现滚动条。加上浏览器的滚动条，就会出现双滚动条的问题（真的丑爆了）。有在网上看了一些给iframe设置高度的方法，思路是在父页面给iframe的onload事件并没有动态修改高度。但是并不适用我遇到的bug。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在子页面动态修改父页面里面的iframe的高度</p>
+<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">function</span> <span class="function"><span class="title">resize</span></span>() &#123;</span><br><span class="line">    var ifm = window.parent.document.getElementsByTagName(<span class="string">'iframe'</span>)[0];</span><br><span class="line">    var h = ifm.contentWindow.document.body.scrollHeight;</span><br><span class="line">    ifm.style.height = h + <span class="string">'px'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  window.onload = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    resize();</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>More info: 该方法是在子页面里执行的。只要子页面内容有改变了，就要重新调取该方法，重新计算iframe的高度</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <!-- <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer> -->
+
+
+    </article>
+
+
+
+
+
+
+
+</div>
+      <!-- <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div> -->
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m a FE. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="宋飞燕">宋飞燕</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
